@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+// Components.
+import Page from "./components/Page";
+// Frame.
+import MaterialFrame from "./components/MaterialFrame";
+// Material.
+import { CircularProgress } from "@material-ui/core";
 
-function App() {
+const App = ({ removeApp, fetchData }) => {
+  const [artObject, setArtObject] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const callback = artObject => {
+      setArtObject(artObject);
+      setIsLoading(false);
+    };
+    fetchData(callback);
+  }, [fetchData]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <MaterialFrame>
+        {isLoading ? (
+          <div
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)"
+            }}
+          >
+            <CircularProgress />
+          </div>
+        ) : (
+          <Page artObject={artObject} removeApp={removeApp} />
+        )}
+      </MaterialFrame>
     </div>
   );
-}
+};
 
 export default App;
