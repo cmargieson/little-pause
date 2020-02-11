@@ -1,7 +1,7 @@
 {
   "short_name": "Little Pause",
   "name": "Little Pause",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
