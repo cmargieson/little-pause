@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["http://*/*", "https://*/*"],
       "js": ["/static/js/main.js"],
       "css": ["/static/css/main.css"]
     }
@@ -14,11 +14,6 @@
     "persistent": false
   },
   "options_page": "options.html",
-  "permissions": [
-    "storage",
-    "tabs",
-    "https://us-central1-little-pause-f4bfa.cloudfunctions.net/object"
-  ],
   "icons": {
     "16": "icon16.png",
     "24": "icon24.png",
