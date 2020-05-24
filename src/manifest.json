@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "little-pause",
+  "version": "1.0",
+
+  "icons": {
+    "16": "icon16.png",
+    "24": "icon24.png",
+    "32": "icon32.png",
+    "64": "icon64.png",
+    "128": "icon128.png",
+    "256": "icon256.png",
+    "512": "icon512.png"
+  },
+
+  "permissions": ["webNavigation"],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "options_page": "options.html"
+}
