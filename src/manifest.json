@@ -1,7 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "little-pause",
-  "version": "1.0",
+  "name": "Little Pause. Take a break from distracting websites.",
+  "description": "Little Pause temporarily blocks distracting websites, showing an image instead.",
+  "version": "1.1.0",
 
   "icons": {
     "16": "icon16.png",
