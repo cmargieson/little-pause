@@ -1,7 +1,7 @@
 {
   "name": "little-pause",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.1.0",
+  "description": "Take a break from distracting websites.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
