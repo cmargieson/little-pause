@@ -14,10 +14,7 @@ const isTimeNowBetween = (start, end) => {
     endDate.add(1, "days");
   }
 
-  if (nowDate.isBetween(startDate, endDate)) {
-    return true;
-  }
-  return false;
+  return nowDate.isBetween(startDate, endDate);
 };
 
 // console.log(isTimeNowBetween("9:00", "17:00"));
