@@ -56,7 +56,7 @@ const App = () => {
                   direction="column"
                   flex={false}
                   pad="small"
-                  width="medium"
+                  basis="1/3"
                 >
                   {data.title && (
                     <Box pad="small">
@@ -68,7 +68,7 @@ const App = () => {
 
                   {data.description && (
                     <Box pad="small">
-                      <StyledTextMedium size="small">
+                      <StyledTextMedium>
                         {data.description}
                       </StyledTextMedium>
                     </Box>
