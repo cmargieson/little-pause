@@ -49,9 +49,8 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
   if (isTimeNowBetween(startTime, endTime)) {
     const pausedURLs = fetchPausedURLs();
 
-    if (pausedURLs.some((pausedURL) => details.url.includes(pausedURL))) {
-      // The tab URL includes at least one **substring** of a URL in the pausedURL array
-
+    // if (pausedURLs.some((pausedURL) => details.url.includes(pausedURL))) {
+    if (pausedURLs.some((pausedURL) => details.url === pausedURL)) {
       chrome.tabs.update(details.tabId, {
         url: chrome.extension.getURL("app.html"),
       });
