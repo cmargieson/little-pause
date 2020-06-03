@@ -3,10 +3,14 @@
 import moment from "moment";
 
 const isTimeNowBetween = (start, end) => {
+  if (!start || !start.length || !end || !end.length) {
+    return true;
+  }
+
   const nowDate = moment();
 
-  const startDate = moment(start, ["HH:mm"]);
-  const endDate = moment(end, ["HH:mm"]);
+  const startDate = moment(start, ["hh:mm a"]);
+  const endDate = moment(end, ["hh:mm a"]);
 
   // Check if end is before start
   if (endDate.isBefore(startDate)) {
@@ -17,22 +21,40 @@ const isTimeNowBetween = (start, end) => {
   return nowDate.isBetween(startDate, endDate);
 };
 
-// console.log(isTimeNowBetween("9:00", "17:00"));
+const fetchStartTime = () => {
+  if (localStorage.getItem("startTime")) {
+    return JSON.parse(localStorage.getItem("startTime"));
+  }
+  return [];
+};
+
+const fetchEndTime = () => {
+  if (localStorage.getItem("endTime")) {
+    return JSON.parse(localStorage.getItem("endTime"));
+  }
+  return "";
+};
 
 const fetchPausedURLs = () => {
   if (localStorage.getItem("pausedURLs")) {
     return JSON.parse(localStorage.getItem("pausedURLs"));
   }
-  return [];
+  return "";
 };
 
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
-  const pausedURLs = fetchPausedURLs();
-  if (pausedURLs.some((pausedURL) => details.url.includes(pausedURL))) {
-    // The tab URL includes at least one **substring** of a URL in the pausedURL array
+  const startTime = fetchStartTime();
+  const endTime = fetchEndTime();
 
-    chrome.tabs.update(details.tabId, {
-      url: chrome.extension.getURL("app.html"),
-    });
+  if (isTimeNowBetween(startTime, endTime)) {
+    const pausedURLs = fetchPausedURLs();
+
+    if (pausedURLs.some((pausedURL) => details.url.includes(pausedURL))) {
+      // The tab URL includes at least one **substring** of a URL in the pausedURL array
+
+      chrome.tabs.update(details.tabId, {
+        url: chrome.extension.getURL("app.html"),
+      });
+    }
   }
 });
