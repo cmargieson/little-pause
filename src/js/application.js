@@ -4,6 +4,7 @@ import { Anchor, Box, Button, Grommet, Heading, Layer, Text } from "grommet";
 import { CircleInformation } from "grommet-icons";
 import axios from "axios";
 import moment from "moment";
+import randomMoment from "random-moment";
 
 const App = () => {
   const [data, setData] = React.useState();
@@ -14,9 +15,7 @@ const App = () => {
       setLoading(true);
       const startDate = moment("20-06-1995 ", "DD-MM-YYYY"); // The first APOD
       const endDate = moment().subtract(1, "days"); // Yesterday's APOD
-      const randomDate = moment(
-        startDate + Math.random() * (endDate - startDate)
-      );
+      const randomDate = randomMoment(startDate, endDate);
       const apikey = "udgHlQc8XhSfpU3wiDsXiEv7rtHxLtCEz6lNEvvW";
 
       axios
