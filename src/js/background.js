@@ -1,26 +1,24 @@
 import moment from "moment";
 
-const urlCheck = (data, url) => data.some((item) => item.url === url);
+const urlCheck = (urlA, urlB) => urlA === urlB;
 
-const dayCheck = (data, day) =>
-  data.some((item) => item.checkedDays.includes(day));
+const dayCheck = (checkedDays, day) => checkedDays.includes(day);
 
-const timeCheck = (data, time) =>
-  data.some((item) => {
-    if (!item.startTime || !item.endTime) {
-      return true;
-    }
+const timeCheck = (start, end) => {
+  if (!start || !end) {
+    return true;
+  }
 
-    const startDate = moment(item.startTime, ["hh:mm a"]);
-    const endDate = moment(item.endTime, ["hh:mm a"]);
+  const startDate = moment(start, ["hh:mm a"]);
+  const endDate = moment(end, ["hh:mm a"]);
 
-    if (endDate.isBefore(startDate)) {
-      // End date must be tomorrow
-      endDate.add(1, "days");
-    }
+  if (endDate.isBefore(startDate)) {
+    // End date must be tomorrow
+    endDate.add(1, "days");
+  }
 
-    return time.isBetween(startDate, endDate);
-  });
+  return moment().isBetween(startDate, endDate);
+};
 
 let data = [];
 
@@ -35,13 +33,15 @@ chrome.storage.onChanged.addListener((changes) => {
 });
 
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
-  if (
-    urlCheck(data, details.url) &&
-    dayCheck(data, moment().format("dddd")) &&
-    timeCheck(data, moment())
-  ) {
-    chrome.tabs.update(details.tabId, {
-      url: chrome.extension.getURL("src/html/little-pause.html"),
-    });
-  }
+  data.map((item) => {
+    if (urlCheck(item.url, details.url)) {
+      if (dayCheck(item.checkedDays, moment().format("dddd"))) {
+        if (timeCheck(item.startTime, item.endTime)) {
+          chrome.tabs.update(details.tabId, {
+            url: chrome.extension.getURL("src/html/little-pause.html"),
+          });
+        }
+      }
+    }
+  });
 });
