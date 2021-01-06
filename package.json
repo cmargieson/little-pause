@@ -21,7 +21,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "grommet": "^2.14.0",
     "grommet-icons": "^4.4.0",
     "moment": "^2.27.0",
