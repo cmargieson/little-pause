@@ -4,10 +4,10 @@ orbs:
   node: circleci/node@3.0.1
 
 jobs:
-  publish:
-    branches:
-      only:
-        - master
+    publish:
+      branches:
+        only:
+          - master
     docker:
       - image: alpine
     environment:
