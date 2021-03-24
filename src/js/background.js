@@ -1,15 +1,26 @@
+// Moment
 import moment from "moment";
 
+/*
+ * Checks if the uri is blocked
+ */
 const urlCheck = (urlA, urlB) => urlA === urlB;
 
+/*
+ * Checks if the day is blocked
+ */
 const dayCheck = (checkedDays, day) => checkedDays.includes(day);
 
+/*
+ * Checks if the time is blocked
+ */
 const timeCheck = (start, end) => {
   if (!start || !end) {
     return true;
   }
 
   const startDate = moment(start, ["hh:mm a"]);
+
   const endDate = moment(end, ["hh:mm a"]);
 
   if (endDate.isBefore(startDate)) {
