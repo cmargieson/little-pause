@@ -5,7 +5,7 @@ orbs:
 
 jobs:
   publish:
-    beanches:
+    branches:
       only:
         - master
     docker:
