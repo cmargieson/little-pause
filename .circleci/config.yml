@@ -5,9 +5,6 @@ orbs:
 
 jobs:
   publish:
-    branches:
-      only:
-        - master
     docker:
       - image: alpine
     environment:
@@ -43,5 +40,9 @@ workflows:
     jobs:
       - node/test
       - publish:
+          filters:
+            branches:
+              only:
+                -master
           requires:
             - node/test
