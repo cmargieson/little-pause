@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+// Grommet
 import {
   Box,
   Button,
@@ -15,7 +16,9 @@ import {
   TextInput,
 } from "grommet";
 import { FormDown, FormNext, FormTrash } from "grommet-icons";
+// uuid
 import { v4 as uuidv4 } from "uuid";
+// Validator
 import validator from "validator";
 
 const MenuButton = ({ label, open, submenu, ...rest }) => {

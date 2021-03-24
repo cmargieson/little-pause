@@ -1,8 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
+// Axios
+import axios from "axios";
+// Grommet
 import { Anchor, Box, Button, Grommet, Heading, Layer, Text } from "grommet";
 import { CircleInformation } from "grommet-icons";
-import axios from "axios";
+// Moment
 import moment from "moment";
 import randomMoment from "random-moment";
 
@@ -16,7 +19,7 @@ const App = () => {
       const startDate = moment("20-06-1995 ", "DD-MM-YYYY"); // The first APOD
       const endDate = moment().subtract(1, "days"); // Yesterday's APOD
       const randomDate = randomMoment(startDate, endDate);
-      const apikey = "udgHlQc8XhSfpU3wiDsXiEv7rtHxLtCEz6lNEvvW";
+      const apikey = "udgHlQc8XhSfpU3wiDsXiEv7rtHxLtCEz6lNEvvW"; // The APOD api key is public
 
       axios
         .get(
@@ -44,56 +47,55 @@ const App = () => {
         <div className="spinner"></div>
       </Box>
     );
-  } else {
-    return (
-      <>
-        {data && data.url && (
-          <Box
-            background={{
-              image: `url(${data.url})`,
-            }}
-            fill
-            pad="small"
-          >
-            <Box direction="row" gap="medium" justify="end">
-              <Button
-                icon={<CircleInformation />}
-                onClick={() => setOpen(!open)}
-              />
-            </Box>
-
-            {open && (
-              <Layer
-                position="center"
-                onClickOutside={() => setOpen(false)}
-                onEsc={() => setOpen(false)}
-              >
-                <Box gap="small" pad="medium">
-                  <Heading level={3} margin="none">
-                    {data && data.title && data.title}
-                  </Heading>
-                  <Text>{data && data.explanation && data.explanation}</Text>
-                  {data && data.copyright ? (
-                    <Anchor
-                      href="https://apod.nasa.gov/"
-                      label={`© ${data.copyright}`}
-                      target="_blank"
-                    />
-                  ) : (
-                    <Anchor
-                      href="https://apod.nasa.gov/"
-                      label={`© NASA`}
-                      target="_blank"
-                    />
-                  )}
-                </Box>
-              </Layer>
-            )}
-          </Box>
-        )}
-      </>
-    );
   }
+  return (
+    <>
+      {data && data.url && (
+        <Box
+          background={{
+            image: `url(${data.url})`,
+          }}
+          fill
+          pad="small"
+        >
+          <Box direction="row" gap="medium" justify="end">
+            <Button
+              icon={<CircleInformation />}
+              onClick={() => setOpen(!open)}
+            />
+          </Box>
+
+          {open && (
+            <Layer
+              position="center"
+              onClickOutside={() => setOpen(false)}
+              onEsc={() => setOpen(false)}
+            >
+              <Box gap="small" pad="medium">
+                <Heading level={3} margin="none">
+                  {data && data.title && data.title}
+                </Heading>
+                <Text>{data && data.explanation && data.explanation}</Text>
+                {data && data.copyright ? (
+                  <Anchor
+                    href="https://apod.nasa.gov/"
+                    label={`© ${data.copyright}`}
+                    target="_blank"
+                  />
+                ) : (
+                  <Anchor
+                    href="https://apod.nasa.gov/"
+                    label={`© NASA`}
+                    target="_blank"
+                  />
+                )}
+              </Box>
+            </Layer>
+          )}
+        </Box>
+      )}
+    </>
+  );
 };
 
 ReactDOM.render(
