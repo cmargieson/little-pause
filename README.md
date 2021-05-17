@@ -2,18 +2,7 @@
 
 **Little Pause** is a Chrome extension that temporarily blocks distracting websites. Distracting websites are replaced with a NASA Astronomy Picture Of The Day. You can choose at what time and on which day each website should be blocked.
 
-### JS React
-
-### Axios
-
-### CircleCI
-
-### Babel
-
-
-### Webpack ([with Custom Config](https://github.com/cmargieson/little-pause/blob/master/webpack.config.js))
-
-### HP's Grommet Component Library
+### Webpack ([Custom Config](https://github.com/cmargieson/little-pause/blob/master/webpack.config.js))
 
 ## Setting Up Continuous Deployment to the Chrome Extension Store with CircleCI
 
